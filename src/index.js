@@ -1,17 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Typography from '@material-ui/core/Typography';
+import TodoForm from './TodoForm';
+import TodoList from './TodoList';
+import useTodoState from './useTodoState';
+import './style.css';
+const App = () => {
+  const { todos, addTodo, deleteTodo } = useTodoState([]);
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  return (
+    <div className='App'>
+      <Typography className='h1' component='h1' variant='h2'>
+        Todos
+        <span>Get things done, one item at a time.</span>
+      </Typography>
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+      <TodoForm
+        saveTodo={todoText => {
+          const trimmedText = todoText.trim();
+
+          if (trimmedText.length > 0) {
+            addTodo(trimmedText);
+          }
+        }}
+      />
+
+      <TodoList todos={todos} deleteTodo={deleteTodo} />
+    </div>
+  );
+};
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App />, rootElement);
