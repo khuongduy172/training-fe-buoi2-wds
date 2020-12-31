@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default initialValue => {
   const [todos, setTodos] = useState(initialValue);
-
+//const [bien ban dau, bien sau] = useState(gia tri ban dau);
   return {
     todos,
     addTodo: todoText => {

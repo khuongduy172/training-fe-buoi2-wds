@@ -1,10 +1,12 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import useInputState from './useInputState';
+import { PinDropSharp } from '@material-ui/icons';
 
-const TodoForm = ({ saveTodo }) => {
+const TodoForm = ({ saveTodo, opacityBox,...props }) => {
   const { value, reset, onChange } = useInputState();
-
+  const {color}= props.colorBox
+  const {opacit}=opacityBox
   return (
     <form
       onSubmit={event => {
@@ -14,6 +16,7 @@ const TodoForm = ({ saveTodo }) => {
         reset();
       }}>
       <TextField
+        style={{backgroundColor: color, opacity: opacit}}
         className='TextField'
         variant='outlined'
         placeholder='Add todo'
